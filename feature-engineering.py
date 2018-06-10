@@ -28,7 +28,7 @@ df['two_and_two'] = ((df.beds == 2) & (df.baths == 2)).astype(int)
 df.two_and_two.mean()
 
 # Creating indicator feature for transactions between 2010 and 2013, inclusive
-df['during_recession']=((df.tx_year >= 2010)&(df.tx_year <= 2013)).astype(int)
+df['during_recession']=df.tx_year.between(2010, 2013).astype(int)
 
 # Percent of transactions where during_recession == 1
 df.during_recession.mean()
@@ -41,9 +41,6 @@ b = df.tx_year.between(2010, 2013).astype(int)
 
 # Check for a and b being equivalent
 print(all(a==b))
-
-# Creating indicator feature for transactions between 2010 and 2013, inclusive
-df['during_recession']=df.tx_year.between(2010, 2013).astype(int)
 
 # Creating property age feature
 df['property_age'] = df.tx_year - df.year_built
